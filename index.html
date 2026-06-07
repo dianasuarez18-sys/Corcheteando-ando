@@ -3,12 +3,935 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corcheteando Ando — Lanas, Patrones y Tutoriales</title>
+  <title>Corcheteando Ando — Lanas, Patrones y Tutoriales de Crochet</title>
+
+  <!-- Favicon 🧶 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧶</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       DESIGN TOKENS — Custom Properties del Sistema
+       ============================================= */
+    :root {
+      --ca-color-wool-natural: #faedcd;
+      --ca-color-terracotta: #d4a373;
+      --ca-color-terracotta-dark: #b07d4f;
+      --ca-color-olive: #e9edc9;
+      --ca-color-mint: #ccd5ae;
+      --ca-color-bone: #fefae0;
+      --ca-color-chocolate: #4a3f35;
+      --ca-color-chocolate-light: #6a5a4c;
+      --ca-color-white: #ffffff;
+      --ca-color-error: #e07a5f;
+      --ca-color-success: #81b29a;
+      --ca-font-display: 'Comfortaa', cursive;
+      --ca-font-body: 'Quicksand', sans-serif;
+      --ca-space-xs: 0.5rem;
+      --ca-space-sm: 1rem;
+      --ca-space-md: 1.5rem;
+      --ca-space-lg: 2rem;
+      --ca-space-xl: 3rem;
+      --ca-radius-sm: 8px;
+      --ca-radius-md: 15px;
+      --ca-radius-lg: 30px;
+      --ca-border-stitch: 3px dashed var(--ca-color-terracotta);
+      --ca-border-stitch-light: 2px dashed rgba(74, 63, 53, 0.3);
+      --ca-shadow-soft: 0 8px 24px rgba(74, 63, 53, 0.08);
+      --ca-shadow-hover: 0 12px 32px rgba(74, 63, 53, 0.15);
+      --ca-transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--ca-font-body);
+      background-color: var(--ca-color-bone);
+      color: var(--ca-color-chocolate);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--ca-font-display); font-weight: 700; }
+
+    *:focus-visible { outline: 3px solid var(--ca-color-terracotta); outline-offset: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* =============================================
+       NAVEGACIÓN
+       ============================================= */
+    .ca-nav-header {
+      background-color: var(--ca-color-wool-natural);
+      border-bottom: var(--ca-border-stitch);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    .ca-nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ca-nav-logo {
+      text-decoration: none;
+      color: var(--ca-color-chocolate);
+      font-family: var(--ca-font-display);
+      font-weight: 700;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ca-nav-menu { display: flex; gap: 20px; list-style: none; }
+
+    .ca-nav-link {
+      text-decoration: none;
+      color: var(--ca-color-chocolate);
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: var(--ca-radius-md);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-nav-link:hover { background-color: var(--ca-color-olive); }
+
+    @media (max-width: 768px) { .ca-nav-menu { display: none; } }
+
+    /* =============================================
+       HERO
+       ============================================= */
+    .ca-hero-section {
+      background-color: var(--ca-color-wool-natural);
+      padding: 80px 20px;
+    }
+
+    .ca-hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .ca-hero-content { display: flex; flex-direction: column; gap: 24px; }
+
+    .ca-hero-tag {
+      align-self: flex-start;
+      background-color: var(--ca-color-olive);
+      color: var(--ca-color-chocolate);
+      padding: 8px 16px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: var(--ca-border-stitch-light);
+    }
+
+    .ca-hero-title { font-size: 3rem; line-height: 1.2; }
+
+    .ca-hero-subtitle { font-size: 1.1rem; color: var(--ca-color-chocolate-light); }
+
+    .ca-hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .ca-hero-btn-primary {
+      display: inline-block;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      text-decoration: none;
+      padding: 14px 28px;
+      font-weight: 700;
+      border-radius: var(--ca-radius-lg);
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-hero-btn-primary:hover {
+      background-color: var(--ca-color-chocolate);
+      transform: translateY(-2px);
+    }
+
+    .ca-hero-btn-secondary {
+      display: inline-block;
+      background-color: transparent;
+      color: var(--ca-color-chocolate);
+      text-decoration: none;
+      padding: 12px 26px;
+      font-weight: 700;
+      border-radius: var(--ca-radius-lg);
+      border: 3px solid var(--ca-color-chocolate);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-hero-btn-secondary:hover {
+      background-color: var(--ca-color-chocolate);
+      color: var(--ca-color-wool-natural);
+    }
+
+    .ca-hero-image-wrapper {
+      background-color: var(--ca-color-olive);
+      border: var(--ca-border-stitch);
+      border-radius: var(--ca-radius-lg);
+      padding: 20px;
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    .ca-hero-svg-deco { width: 100%; height: auto; }
+
+    @media (max-width: 992px) {
+      .ca-hero-container { grid-template-columns: 1fr; text-align: center; }
+      .ca-hero-content { align-items: center; }
+      .ca-hero-title { font-size: 2.2rem; }
+    }
+
+    /* =============================================
+       PROPUESTA DE VALOR
+       ============================================= */
+    .ca-value-section { padding: 80px 20px; background-color: var(--ca-color-bone); }
+
+    .ca-section-title-wrapper { text-align: center; margin-bottom: 50px; }
+
+    .ca-section-title { font-size: 2.2rem; margin-bottom: 12px; }
+
+    .ca-section-divider {
+      width: 80px; height: 4px;
+      background: var(--ca-color-terracotta);
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+
+    .ca-value-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .ca-value-card {
+      background-color: var(--ca-color-wool-natural);
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch);
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-value-card:hover { transform: translateY(-5px); box-shadow: var(--ca-shadow-hover); }
+
+    .ca-value-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+
+    .ca-value-title { font-size: 1.3rem; margin-bottom: 10px; }
+
+    .ca-value-desc { color: var(--ca-color-chocolate-light); font-size: 0.95rem; }
+
+    /* =============================================
+       CATÁLOGO / CARACTERÍSTICAS
+       ============================================= */
+    .ca-catalog-section { padding: 80px 20px; background-color: var(--ca-color-olive); }
+
+    .ca-products-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .ca-card-container {
+      background-color: var(--ca-color-white);
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-card-container:hover { transform: translateY(-5px); box-shadow: var(--ca-shadow-hover); }
+
+    .ca-card-icon { font-size: 2rem; }
+
+    .ca-card-title { font-size: 1.3rem; }
+
+    .ca-card-desc { color: var(--ca-color-chocolate-light); font-size: 0.95rem; flex-grow: 1; }
+
+    .ca-card-badge-container { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .ca-card-badge {
+      background-color: var(--ca-color-wool-natural);
+      color: var(--ca-color-chocolate);
+      padding: 4px 12px;
+      border-radius: var(--ca-radius-md);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .ca-card-btn {
+      display: block;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-card-btn:hover { background-color: var(--ca-color-chocolate); }
+
+    /* =============================================
+       TESTIMONIOS
+       ============================================= */
+    .ca-testimonial-section { padding: 80px 20px; background-color: var(--ca-color-wool-natural); }
+
+    .ca-testimonials-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .ca-testimonial-card {
+      background-color: var(--ca-color-white);
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-testimonial-card:hover { transform: translateY(-5px); box-shadow: var(--ca-shadow-hover); }
+
+    .ca-testimonial-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      font-family: var(--ca-font-display);
+    }
+
+    .ca-testimonial-name { font-size: 1.1rem; margin-bottom: 4px; }
+
+    .ca-testimonial-city { font-size: 0.85rem; color: var(--ca-color-terracotta); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .ca-testimonial-text { font-size: 0.95rem; color: var(--ca-color-chocolate-light); font-style: italic; line-height: 1.7; }
+
+    /* =============================================
+       FORMULARIO CON PERSISTENCIA
+       ============================================= */
+    .ca-form-section { padding: 80px 20px; background-color: var(--ca-color-bone); }
+
+    .ca-form-card {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: var(--ca-color-wool-natural);
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch);
+      padding: 45px;
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    .ca-form-title { font-size: 2rem; margin-bottom: 10px; text-align: center; }
+
+    .ca-form-subtitle { text-align: center; color: var(--ca-color-chocolate-light); margin-bottom: 30px; }
+
+    .ca-form-group { margin-bottom: 20px; }
+
+    .ca-form-label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+
+    .ca-form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--ca-radius-md);
+      border: 2px solid transparent;
+      background-color: var(--ca-color-white);
+      color: var(--ca-color-chocolate);
+      font-size: 1rem;
+      font-family: var(--ca-font-body);
+      font-weight: 500;
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-form-input:focus {
+      outline: none;
+      border-color: var(--ca-color-terracotta);
+      box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.2);
+    }
+
+    textarea.ca-form-input { min-height: 120px; resize: vertical; }
+
+    .ca-form-btn {
+      width: 100%;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      border: none;
+      padding: 16px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      font-family: var(--ca-font-display);
+      transition: var(--ca-transition-smooth);
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    .ca-form-btn:hover { background-color: var(--ca-color-chocolate); }
+
+    .ca-form-error { color: var(--ca-color-error); font-size: 0.82rem; font-weight: 700; margin-top: 5px; display: none; }
+
+    .ca-form-group.error .ca-form-error { display: block; }
+
+    .ca-form-group.error .ca-form-input { border-color: var(--ca-color-error); }
+
+    .ca-form-group.success .ca-form-input { border-color: var(--ca-color-success); }
+
+    /* Usuario convertido */
+    .ca-thank-you {
+      text-align: center;
+      padding: 30px;
+      display: none;
+    }
+
+    .ca-thank-you-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+
+    .ca-thank-you h3 { font-size: 1.8rem; margin-bottom: 12px; }
+
+    .ca-thank-you p { color: var(--ca-color-chocolate-light); margin-bottom: 20px; }
+
+    .ca-thank-you-btn {
+      background-color: var(--ca-color-olive);
+      color: var(--ca-color-chocolate);
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--ca-font-display);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-thank-you-btn:hover { background-color: var(--ca-color-mint); }
+
+    /* Toast */
+    .ca-toast {
+      position: fixed;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--ca-color-chocolate);
+      color: var(--ca-color-wool-natural);
+      padding: 16px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      box-shadow: var(--ca-shadow-hover);
+      transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+      white-space: nowrap;
+      font-family: var(--ca-font-body);
+    }
+
+    .ca-toast.show { bottom: 30px; }
+
+    .ca-toast-success { border-left: 5px solid var(--ca-color-success); }
+
+    .ca-toast-error { border-left: 5px solid var(--ca-color-error); }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    .ca-footer-section {
+      background-color: var(--ca-color-chocolate);
+      color: var(--ca-color-wool-natural);
+      padding: 60px 20px 30px;
+      border-top: var(--ca-border-stitch);
+    }
+
+    .ca-footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .ca-footer-col { display: flex; flex-direction: column; gap: 12px; }
+
+    .ca-footer-title { font-size: 1.1rem; color: var(--ca-color-terracotta); }
+
+    .ca-footer-desc { color: rgba(250, 237, 205, 0.8); font-size: 0.9rem; }
+
+    .ca-footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .ca-footer-link {
+      color: rgba(250, 237, 205, 0.8);
+      text-decoration: none;
+      transition: var(--ca-transition-smooth);
+      font-size: 0.9rem;
+    }
+
+    .ca-footer-link:hover { color: var(--ca-color-olive); padding-left: 5px; }
+
+    .ca-footer-legal {
+      border-top: 1px solid rgba(250, 237, 205, 0.15);
+      padding-top: 25px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(250, 237, 205, 0.6);
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Scroll to top */
+    .ca-scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: var(--ca-shadow-hover);
+      transition: var(--ca-transition-smooth);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .ca-scroll-top.visible { opacity: 1; pointer-events: all; }
+
+    .ca-scroll-top:hover { background-color: var(--ca-color-chocolate); transform: translateY(-3px); }
+  </style>
 </head>
 <body>
-  <h1>Corcheteando Ando</h1>
-  <p>Tu tienda de lanas, patrones y tutoriales de crochet.</p>
+
+  <!-- NAVEGACIÓN -->
+  <header>
+    <nav class="ca-nav-header" aria-label="Navegación principal">
+      <div class="ca-nav-container">
+        <a href="#" class="ca-nav-logo">🧶 Corcheteando Ando</a>
+        <ul class="ca-nav-menu">
+          <li><a href="#valor" class="ca-nav-link">Nosotros</a></li>
+          <li><a href="#catalogo" class="ca-nav-link">Catálogo</a></li>
+          <li><a href="#testimonios" class="ca-nav-link">Testimonios</a></li>
+          <li><a href="#contacto" class="ca-nav-link">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="ca-hero-section" id="inicio">
+      <div class="ca-hero-container">
+        <div class="ca-hero-content">
+          <span class="ca-hero-tag">Hecho a mano con Amor ✦</span>
+          <h1 class="ca-hero-title">Encuentra tu inspiración punto a punto</h1>
+          <p class="ca-hero-subtitle">Lanas de origen natural, patrones descargables y tutoriales paso a paso para tejer con amor y calentar el corazón.</p>
+          <div class="ca-hero-actions">
+            <a href="#catalogo" class="ca-hero-btn-primary">Ver Catálogo</a>
+            <a href="#contacto" class="ca-hero-btn-secondary">Contáctanos</a>
+          </div>
+        </div>
+        <div>
+          <div class="ca-hero-image-wrapper">
+            <svg class="ca-hero-svg-deco" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración de ovillo de lana con ganchillo">
+              <circle cx="200" cy="160" r="110" fill="#faedcd" stroke="#4a3f35" stroke-width="4"/>
+              <path d="M120 120 C160 80, 240 80, 280 120" stroke="#d4a373" stroke-width="4" stroke-linecap="round"/>
+              <path d="M110 160 C150 120, 250 120, 290 160" stroke="#4a3f35" stroke-width="3" stroke-linecap="round"/>
+              <path d="M120 200 C160 240, 240 240, 280 200" stroke="#d4a373" stroke-width="4" stroke-linecap="round"/>
+              <path d="M160 100 C160 160, 240 160, 240 220" stroke="#4a3f35" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="70" y="270" width="280" height="14" rx="7" transform="rotate(-30 70 270)" fill="#4a3f35"/>
+              <path d="M300 137 C315 125, 320 135, 312 143" stroke="#4a3f35" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <circle cx="180" cy="230" r="4" fill="#ffb3c1"/>
+              <circle cx="220" cy="230" r="4" fill="#ffb3c1"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROPUESTA DE VALOR -->
+    <section class="ca-value-section" id="valor">
+      <div class="ca-section-title-wrapper">
+        <h2 class="ca-section-title">¿Por qué elegir Corcheteando Ando?</h2>
+        <div class="ca-section-divider"></div>
+      </div>
+      <div class="ca-value-grid">
+        <article class="ca-value-card">
+          <span class="ca-value-icon">🌿</span>
+          <h3 class="ca-value-title">Materiales Naturales</h3>
+          <p class="ca-value-desc">Lanas 100% orgánicas con tintes naturales, respetuosas con el medio ambiente y suaves para tus manos.</p>
+        </article>
+        <article class="ca-value-card">
+          <span class="ca-value-icon">📖</span>
+          <h3 class="ca-value-title">Patrones Claros</h3>
+          <p class="ca-value-desc">Instrucciones paso a paso con diagramas detallados, ideales para principiantes y tejedoras avanzadas.</p>
+        </article>
+        <article class="ca-value-card">
+          <span class="ca-value-icon">🎥</span>
+          <h3 class="ca-value-title">Tutoriales en Video</h3>
+          <p class="ca-value-desc">Videos en alta definición con múltiples ángulos para que no te pierdas ningún detalle del tejido.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="ca-catalog-section" id="catalogo">
+      <div class="ca-section-title-wrapper">
+        <h2 class="ca-section-title">Nuestras Creaciones</h2>
+        <div class="ca-section-divider"></div>
+      </div>
+      <div class="ca-products-grid">
+        <article class="ca-card-container">
+          <span class="ca-card-icon">🧶</span>
+          <h3 class="ca-card-title">Lanas de Origen Natural</h3>
+          <p class="ca-card-desc">Fibras orgánicas seleccionadas: algodón rústico, lana merino hilada a mano y tintes naturales que cuidan el planeta.</p>
+          <div class="ca-card-badge-container">
+            <span class="ca-card-badge">Orgánico</span>
+            <span class="ca-card-badge">Tinte Natural</span>
+          </div>
+          <a href="#contacto" class="ca-card-btn">Explorar Fibras</a>
+        </article>
+        <article class="ca-card-container">
+          <span class="ca-card-icon">📄</span>
+          <h3 class="ca-card-title">Patrones Descargables</h3>
+          <p class="ca-card-desc">Diseños propios con instrucciones fila por fila, diagramas y soporte por chat para resolver tus dudas.</p>
+          <div class="ca-card-badge-container">
+            <span class="ca-card-badge">PDF Interactivo</span>
+            <span class="ca-card-badge">Soporte Chat</span>
+          </div>
+          <a href="#contacto" class="ca-card-btn">Ver Catálogo PDF</a>
+        </article>
+        <article class="ca-card-container">
+          <span class="ca-card-icon">▶️</span>
+          <h3 class="ca-card-title">Tutoriales Paso a Paso</h3>
+          <p class="ca-card-desc">Videos desde el anillo mágico hasta los detalles finales de tus amigurumis con acceso ilimitado.</p>
+          <div class="ca-card-badge-container">
+            <span class="ca-card-badge">Acceso Infinito</span>
+            <span class="ca-card-badge">Multi-ángulo</span>
+          </div>
+          <a href="#contacto" class="ca-card-btn">Entrar a la Academia</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="ca-testimonial-section" id="testimonios">
+      <div class="ca-section-title-wrapper">
+        <h2 class="ca-section-title">Lo que dicen nuestras tejedoras</h2>
+        <div class="ca-section-divider"></div>
+      </div>
+      <div class="ca-testimonials-grid">
+        <article class="ca-testimonial-card">
+          <div class="ca-testimonial-avatar">MC</div>
+          <h3 class="ca-testimonial-name">María Camila</h3>
+          <p class="ca-testimonial-city">Medellín</p>
+          <p class="ca-testimonial-text">"La calidad de la lana es insuperable. Es súper suave y no se deshilacha. ¡Mis amigurumis quedaron divinos y muy prolijos!"</p>
+        </article>
+        <article class="ca-testimonial-card">
+          <div class="ca-testimonial-avatar">S</div>
+          <h3 class="ca-testimonial-name">Santiago</h3>
+          <p class="ca-testimonial-city">Bogotá</p>
+          <p class="ca-testimonial-text">"Los patrones son increíblemente claros. El tutorial para tejer el saco me ayudó a terminar mi primer proyecto grande sin frustrarme."</p>
+        </article>
+        <article class="ca-testimonial-card">
+          <div class="ca-testimonial-avatar">L</div>
+          <h3 class="ca-testimonial-name">Laura</h3>
+          <p class="ca-testimonial-city">Cali</p>
+          <p class="ca-testimonial-text">"Me encantaron las paletas de colores. Los patrones de tops de verano son modernos y muy detallados. ¡Volveré a comprar sin duda!"</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FORMULARIO CON PERSISTENCIA -->
+    <section class="ca-form-section" id="contacto">
+      <div class="ca-form-card">
+        <div id="ca-form-wrapper">
+          <h2 class="ca-form-title">¿Lista para tejer?</h2>
+          <p class="ca-form-subtitle">Déjanos tu mensaje y te respondemos con amor 🧶</p>
+          <form id="ca-contact-form" novalidate>
+            <div class="ca-form-group" id="ca-group-nombre">
+              <label for="ca-nombre" class="ca-form-label">Nombre completo</label>
+              <input type="text" id="ca-nombre" class="ca-form-input" placeholder="Ej. Diana Suárez" autocomplete="name">
+              <span class="ca-form-error">Por favor escribe tu nombre completo.</span>
+            </div>
+            <div class="ca-form-group" id="ca-group-email">
+              <label for="ca-email" class="ca-form-label">Correo electrónico</label>
+              <input type="email" id="ca-email" class="ca-form-input" placeholder="ejemplo@correo.com" autocomplete="email">
+              <span class="ca-form-error">Ingresa un correo electrónico válido.</span>
+            </div>
+            <div class="ca-form-group" id="ca-group-telefono">
+              <label for="ca-telefono" class="ca-form-label">Teléfono</label>
+              <input type="tel" id="ca-telefono" class="ca-form-input" placeholder="+57 300 123 4567" autocomplete="tel">
+              <span class="ca-form-error">Ingresa un número válido (mínimo 7 dígitos).</span>
+            </div>
+            <div class="ca-form-group" id="ca-group-mensaje">
+              <label for="ca-mensaje" class="ca-form-label">¿Qué proyecto tienes en mente?</label>
+              <textarea id="ca-mensaje" class="ca-form-input" placeholder="Cuéntanos qué quieres tejer..."></textarea>
+              <span class="ca-form-error">El mensaje debe tener al menos 10 caracteres.</span>
+            </div>
+            <button type="submit" class="ca-form-btn" id="ca-submit-btn">Enviar mensaje ✨</button>
+          </form>
+        </div>
+        <div class="ca-thank-you" id="ca-thank-you">
+          <span class="ca-thank-you-icon">💖</span>
+          <h3>¡Hola de nuevo, <span id="ca-user-name"></span>!</h3>
+          <p>Ya recibimos tu mensaje. ¡Te escribiremos muy pronto con las mejores recomendaciones de lanas y patrones!</p>
+          <button class="ca-thank-you-btn" id="ca-reset-btn">Enviar otro mensaje 🧶</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ca-footer-section">
+    <div class="ca-footer-container">
+      <div class="ca-footer-col">
+        <h3 class="ca-footer-title">🧶 Corcheteando Ando</h3>
+        <p class="ca-footer-desc">Espacio artesanal dedicado a rescatar el arte del tejido a mano con materiales naturales y sostenibles.</p>
+      </div>
+      <div class="ca-footer-col">
+        <h4 class="ca-footer-title">Enlaces</h4>
+        <ul class="ca-footer-links">
+          <li><a href="#valor" class="ca-footer-link">Nosotros</a></li>
+          <li><a href="#catalogo" class="ca-footer-link">Catálogo</a></li>
+          <li><a href="#testimonios" class="ca-footer-link">Testimonios</a></li>
+          <li><a href="#contacto" class="ca-footer-link">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="ca-footer-col">
+        <h4 class="ca-footer-title">Contacto</h4>
+        <p class="ca-footer-desc">hola@corcheteandoando.com</p>
+        <p class="ca-footer-desc">Tunja, Boyacá, Colombia</p>
+      </div>
+    </div>
+    <div class="ca-footer-legal">
+      <p>© 2026 Corcheteando Ando. Todos los derechos reservados. Los datos personales recopilados mediante el formulario serán utilizados únicamente para contacto comercial y no serán compartidos con terceros.</p>
+    </div>
+  </footer>
+
+  <!-- Botón scroll to top -->
+  <button class="ca-scroll-top" id="ca-scroll-top" aria-label="Volver arriba">↑</button>
+
+  <!-- Toast -->
+  <div class="ca-toast" id="ca-toast"></div>
+
+  <script>
+    (function() {
+      // =============================================
+      // CONFIGURACIÓN
+      // =============================================
+      const FORMSPREE_URL = 'https://formspree.io/f/xwvjpqnp';
+      const NS = {
+        nombre: 'ca_nombre',
+        email: 'ca_email',
+        telefono: 'ca_telefono',
+        mensaje: 'ca_mensaje',
+        enviado: 'ca_enviado'
+      };
+
+      const fields = {
+        nombre: {
+          input: document.getElementById('ca-nombre'),
+          group: document.getElementById('ca-group-nombre'),
+          validate: v => v.trim().length >= 3
+        },
+        email: {
+          input: document.getElementById('ca-email'),
+          group: document.getElementById('ca-group-email'),
+          validate: v => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v.trim())
+        },
+        telefono: {
+          input: document.getElementById('ca-telefono'),
+          group: document.getElementById('ca-group-telefono'),
+          validate: v => {
+            const t = v.trim();
+            if (!t) return false;
+            const clean = t.replace(/[\s\-\(\)\+]/g, '');
+            return /^\+?[0-9\s\-\(\)]{7,15}$/.test(t) && clean.length >= 7;
+          }
+        },
+        mensaje: {
+          input: document.getElementById('ca-mensaje'),
+          group: document.getElementById('ca-group-mensaje'),
+          validate: v => v.trim().length >= 10
+        }
+      };
+
+      // =============================================
+      // TOAST
+      // =============================================
+      const toast = document.getElementById('ca-toast');
+      let toastTimer;
+
+      function showToast(msg, type = 'success') {
+        clearTimeout(toastTimer);
+        toast.textContent = msg;
+        toast.className = `ca-toast show ca-toast-${type}`;
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 5000);
+      }
+
+      // =============================================
+      // VALIDACIÓN DE CAMPOS
+      // =============================================
+      function checkField(key) {
+        const f = fields[key];
+        const valid = f.validate(f.input.value);
+        f.group.classList.toggle('error', !valid);
+        f.group.classList.toggle('success', valid);
+        return valid;
+      }
+
+      Object.keys(fields).forEach(key => {
+        fields[key].input.addEventListener('blur', () => checkField(key));
+        fields[key].input.addEventListener('input', () => {
+          if (fields[key].group.classList.contains('error')) checkField(key);
+          // Autoguardado en localStorage
+          localStorage.setItem(NS[key], fields[key].input.value);
+        });
+      });
+
+      // =============================================
+      // ESTADO DE USUARIO CONVERTIDO
+      // =============================================
+      function checkState() {
+        const sent = localStorage.getItem(NS.enviado) === 'true';
+        document.getElementById('ca-form-wrapper').style.display = sent ? 'none' : 'block';
+        document.getElementById('ca-thank-you').style.display = sent ? 'block' : 'none';
+        if (sent) {
+          document.getElementById('ca-user-name').textContent =
+            localStorage.getItem(NS.nombre) || 'tejedora';
+        }
+      }
+
+      // =============================================
+      // RESTAURACIÓN DE CAMPOS
+      // =============================================
+      function restoreFields() {
+        Object.keys(fields).forEach(key => {
+          const saved = localStorage.getItem(NS[key]);
+          if (saved) {
+            fields[key].input.value = saved;
+            if (saved.trim()) checkField(key);
+          }
+        });
+      }
+
+      // =============================================
+      // ENVÍO A FORMSPREE
+      // =============================================
+      document.getElementById('ca-contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valid = true;
+        Object.keys(fields).forEach(key => { if (!checkField(key)) valid = false; });
+        if (!valid) {
+          showToast('Por favor completa todos los campos correctamente.', 'error');
+          return;
+        }
+
+        const btn = document.getElementById('ca-submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Enviando... 🧶';
+
+        const payload = {
+          nombre: fields.nombre.input.value.trim(),
+          email: fields.email.input.value.trim(),
+          telefono: fields.telefono.input.value.trim(),
+          mensaje: fields.mensaje.input.value.trim()
+        };
+
+        fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(res => {
+          if (res.ok) {
+            const nombre = payload.nombre;
+            localStorage.clear();
+            localStorage.setItem(NS.enviado, 'true');
+            localStorage.setItem(NS.nombre, nombre);
+            this.reset();
+            Object.keys(fields).forEach(k => {
+              fields[k].group.classList.remove('success', 'error');
+            });
+            setTimeout(checkState, 800);
+          } else {
+            throw new Error('Error en el servidor');
+          }
+        })
+        .catch(() => showToast('Error al enviar. Intenta de nuevo.', 'error'))
+        .finally(() => {
+          btn.disabled = false;
+          btn.textContent = 'Enviar mensaje ✨';
+        });
+      });
+
+      document.getElementById('ca-reset-btn').addEventListener('click', () => {
+        localStorage.clear();
+        checkState();
+      });
+
+      // =============================================
+      // SCROLL TO TOP
+      // =============================================
+      const scrollBtn = document.getElementById('ca-scroll-top');
+      window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('visible', window.scrollY > 400);
+      });
+      scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // =============================================
+      // INICIALIZACIÓN
+      // =============================================
+      checkState();
+      restoreFields();
+
+    })();
+  </script>
 </body>
 </html>
-
-<!-- Corcheteando Ando - Landing page en desarrollo -->
