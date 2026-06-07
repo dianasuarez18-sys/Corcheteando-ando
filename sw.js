@@ -1,3 +1,4 @@
+// PWA verificada e instalada en dispositivo móvil 
 // Service Worker - Corcheteando Ando PWA
 const CACHE_NAME = 'corcheteando-ando-v1';
 
