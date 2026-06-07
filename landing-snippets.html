@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corcheteando Ando - Tienda Artesanal de Crochet</title>
+  
+  <!-- Fuentes de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos del Sistema de Diseño -->
+  <style>
+    /* Variables de Diseño Oficiales */
+    :root {
+      --ca-color-wool-natural: #faedcd;
+      --ca-color-terracotta: #d4a373;
+      --ca-color-olive: #e9edc9;
+      --ca-color-chocolate: #4a3f35;
+      --ca-color-chocolate-light: #6a5a4c;
+      --ca-color-cream-bg: #fefae0;
+      --ca-color-white: #ffffff;
+      
+      --ca-radius-lg: 30px;
+      --ca-radius-md: 15px;
+      --ca-radius-sm: 8px;
+      
+      --ca-border-stitch: 3px dashed var(--ca-color-terracotta);
+      --ca-border-stitch-light: 2px dashed rgba(74, 63, 53, 0.3);
+      
+      --ca-shadow-soft: 0 8px 24px rgba(74, 63, 53, 0.08);
+      --ca-shadow-hover: 0 12px 32px rgba(74, 63, 53, 0.15);
+      
+      --ca-transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset y Estilos Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--ca-color-cream-bg);
+      color: var(--ca-color-chocolate);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Comfortaa', cursive;
+      font-weight: 700;
+    }
+
+    a, button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    /* Enfoque accesible */
+    *:focus-visible {
+      outline: 3px solid var(--ca-color-terracotta);
+      outline-offset: 4px;
+    }
+
+    /* Soporte para preferencias de movimiento reducido */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* --- NAVEGACIÓN --- */
+    .ca-nav-header {
+      background-color: var(--ca-color-wool-natural);
+      border-bottom: var(--ca-border-stitch);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    .ca-nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ca-nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ca-color-chocolate);
+      font-family: 'Comfortaa', cursive;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    .ca-nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      fill: var(--ca-color-terracotta);
+    }
+
+    .ca-nav-menu {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .ca-nav-link {
+      text-decoration: none;
+      color: var(--ca-color-chocolate);
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: var(--ca-radius-md);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-nav-link:hover {
+      background-color: var(--ca-color-olive);
+      color: var(--ca-color-chocolate);
+    }
+
+    .ca-nav-mobile-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--ca-color-chocolate);
+      cursor: pointer;
+    }
+
+    /* --- HERO SECTION --- */
+    .ca-hero-section {
+      background-color: var(--ca-color-wool-natural);
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ca-hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .ca-hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .ca-hero-tag {
+      align-self: flex-start;
+      background-color: var(--ca-color-olive);
+      color: var(--ca-color-chocolate);
+      padding: 8px 16px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: var(--ca-border-stitch-light);
+    }
+
+    .ca-hero-title {
+      font-size: 3rem;
+      line-height: 1.2;
+      color: var(--ca-color-chocolate);
+    }
+
+    .ca-hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--ca-color-chocolate-light);
+    }
+
+    .ca-hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .ca-hero-btn-primary {
+      display: inline-block;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      text-decoration: none;
+      padding: 14px 28px;
+      font-weight: 700;
+      border-radius: var(--ca-radius-lg);
+      border: 3px solid transparent;
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+      text-align: center;
+    }
+
+    .ca-hero-btn-primary:hover {
+      background-color: var(--ca-color-chocolate);
+      box-shadow: var(--ca-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .ca-hero-btn-secondary {
+      display: inline-block;
+      background-color: transparent;
+      color: var(--ca-color-chocolate);
+      text-decoration: none;
+      padding: 12px 26px;
+      font-weight: 700;
+      border-radius: var(--ca-radius-lg);
+      border: 3px solid var(--ca-color-chocolate);
+      transition: var(--ca-transition-smooth);
+      text-align: center;
+    }
+
+    .ca-hero-btn-secondary:hover {
+      background-color: var(--ca-color-chocolate);
+      color: var(--ca-color-wool-natural);
+    }
+
+    .ca-hero-illustration {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .ca-hero-image-wrapper {
+      width: 100%;
+      max-width: 450px;
+      background-color: var(--ca-color-olive);
+      border: var(--ca-border-stitch);
+      border-radius: var(--ca-radius-lg);
+      padding: 20px;
+      box-shadow: var(--ca-shadow-soft);
+      position: relative;
+    }
+
+    .ca-hero-svg-deco {
+      width: 100%;
+      height: auto;
+      border-radius: calc(var(--ca-radius-lg) - 10px);
+    }
+
+    /* --- CARDS / PRODUCTOS --- */
+    .ca-section-products {
+      padding: 100px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ca-section-title-wrapper {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .ca-section-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--ca-color-chocolate);
+    }
+
+    .ca-section-divider {
+      width: 100px;
+      height: 4px;
+      background: var(--ca-color-terracotta);
+      border-radius: 2px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .ca-section-divider::before {
+      content: '✦';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--ca-color-cream-bg);
+      padding: 0 10px;
+      color: var(--ca-color-terracotta);
+      font-size: 1.2rem;
+    }
+
+    .ca-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .ca-card-container {
+      background-color: var(--ca-color-white);
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-card-container:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--ca-shadow-hover);
+    }
+
+    .ca-card-icon-box {
+      width: 70px;
+      height: 70px;
+      border-radius: var(--ca-radius-md);
+      background-color: var(--ca-color-wool-natural);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: var(--ca-border-stitch-light);
+    }
+
+    .ca-card-icon {
+      width: 40px;
+      height: 40px;
+      fill: var(--ca-color-chocolate);
+    }
+
+    .ca-card-title {
+      font-size: 1.5rem;
+      color: var(--ca-color-chocolate);
+    }
+
+    .ca-card-desc {
+      color: var(--ca-color-chocolate-light);
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+
+    .ca-card-badge-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ca-card-badge {
+      background-color: var(--ca-color-olive);
+      color: var(--ca-color-chocolate);
+      padding: 4px 12px;
+      border-radius: var(--ca-radius-md);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .ca-card-btn {
+      margin-top: 10px;
+      display: block;
+      background-color: var(--ca-color-wool-natural);
+      color: var(--ca-color-chocolate);
+      text-decoration: none;
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      transition: var(--ca-transition-smooth);
+      border: 2px solid transparent;
+    }
+
+    .ca-card-btn:hover {
+      background-color: var(--ca-color-chocolate);
+      color: var(--ca-color-white);
+    }
+
+    /* --- SIMULADOR INTERACTIVO --- */
+    .ca-simulator-section {
+      background-color: var(--ca-color-olive);
+      padding: 80px 20px;
+      border-top: var(--ca-border-stitch);
+      border-bottom: var(--ca-border-stitch);
+    }
+
+    .ca-simulator-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .ca-simulator-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ca-simulator-title {
+      font-size: 2.3rem;
+      color: var(--ca-color-chocolate);
+    }
+
+    .ca-simulator-text {
+      font-size: 1.1rem;
+      color: var(--ca-color-chocolate-light);
+    }
+
+    .ca-simulator-options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: var(--ca-color-white);
+      padding: 25px;
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch-light);
+    }
+
+    .ca-simulator-option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ca-simulator-option-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ca-simulator-swatches {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ca-simulator-swatch {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 3px solid var(--ca-color-white);
+      outline: 2px solid #e2e8f0;
+      cursor: pointer;
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-simulator-swatch:hover,
+    .ca-simulator-swatch.active {
+      transform: scale(1.15);
+      outline: 3px solid var(--ca-color-chocolate);
+    }
+
+    .ca-simulator-preview-box {
+      background-color: var(--ca-color-wool-natural);
+      border: var(--ca-border-stitch);
+      border-radius: var(--ca-radius-lg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: var(--ca-shadow-soft);
+      min-height: 400px;
+    }
+
+    /* SVG del Amigurumi Pulpito */
+    .ca-amigurumi-svg {
+      width: 250px;
+      height: auto;
+      filter: drop-shadow(0 10px 15px rgba(74, 63, 53, 0.15));
+      transition: var(--ca-transition-smooth);
+    }
+
+    /* Elementos interactivos del SVG */
+    .ca-amigurumi-body {
+      fill: var(--ca-color-terracotta);
+      transition: fill 0.4s ease;
+    }
+
+    .ca-amigurumi-eyes {
+      fill: var(--ca-color-chocolate);
+    }
+
+    .ca-amigurumi-cheeks {
+      fill: #ffb3c1;
+    }
+
+    .ca-amigurumi-acc {
+      fill: var(--ca-color-olive);
+      transition: fill 0.4s ease;
+    }
+
+    .ca-simulator-label {
+      margin-top: 20px;
+      font-family: 'Comfortaa', cursive;
+      font-weight: 700;
+      background-color: var(--ca-color-white);
+      padding: 8px 16px;
+      border-radius: var(--ca-radius-md);
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    /* --- FORMULARIO / CONTACTO --- */
+    .ca-form-section {
+      padding: 100px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .ca-form-card {
+      background-color: var(--ca-color-wool-natural);
+      border-radius: var(--ca-radius-lg);
+      border: var(--ca-border-stitch);
+      padding: 45px;
+      text-align: center;
+      box-shadow: var(--ca-shadow-soft);
+    }
+
+    .ca-form-title {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      color: var(--ca-color-chocolate);
+    }
+
+    .ca-form-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: var(--ca-color-chocolate-light);
+    }
+
+    .ca-form-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .ca-form-control-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .ca-form-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .ca-form-input {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--ca-radius-md);
+      border: 2px solid transparent;
+      background-color: var(--ca-color-white);
+      color: var(--ca-color-chocolate);
+      font-size: 1rem;
+      font-weight: 500;
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-form-input:focus {
+      outline: none;
+      border-color: var(--ca-color-terracotta);
+      box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.25);
+    }
+
+    .ca-form-btn {
+      grid-column: span 2;
+      width: 100%;
+      background-color: var(--ca-color-terracotta);
+      color: var(--ca-color-white);
+      border: none;
+      padding: 16px;
+      border-radius: var(--ca-radius-md);
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--ca-shadow-soft);
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-form-btn:hover {
+      background-color: var(--ca-color-chocolate);
+      box-shadow: var(--ca-shadow-hover);
+    }
+
+    /* Caja de mensaje personalizada en lugar de alert() */
+    .ca-message-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: var(--ca-radius-md);
+      display: none;
+      font-weight: 700;
+      border: var(--ca-border-stitch-light);
+    }
+
+    .ca-message-success {
+      background-color: var(--ca-color-olive);
+      color: var(--ca-color-chocolate);
+    }
+
+    /* --- PIE DE PÁGINA --- */
+    .ca-footer-section {
+      background-color: var(--ca-color-chocolate);
+      color: var(--ca-color-wool-natural);
+      padding: 60px 20px 30px;
+      border-top: var(--ca-border-stitch);
+    }
+
+    .ca-footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .ca-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .ca-footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ca-color-wool-natural);
+    }
+
+    .ca-footer-logo-icon {
+      width: 35px;
+      height: 35px;
+      fill: var(--ca-color-wool-natural);
+    }
+
+    .ca-footer-desc {
+      color: rgba(250, 237, 205, 0.8);
+      font-size: 0.95rem;
+    }
+
+    .ca-footer-title {
+      font-size: 1.2rem;
+      color: var(--ca-color-terracotta);
+    }
+
+    .ca-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ca-footer-link {
+      color: rgba(250, 237, 205, 0.8);
+      text-decoration: none;
+      transition: var(--ca-transition-smooth);
+    }
+
+    .ca-footer-link:hover {
+      color: var(--ca-color-olive);
+      padding-left: 5px;
+    }
+
+    .ca-footer-bottom {
+      border-top: 1px solid rgba(250, 237, 205, 0.1);
+      padding-top: 25px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(250, 237, 205, 0.6);
+    }
+
+    /* --- RESPONSIVIDAD --- */
+    @media (max-width: 992px) {
+      .ca-hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .ca-hero-content {
+        align-items: center;
+      }
+
+      .ca-hero-title {
+        font-size: 2.5rem;
+      }
+
+      .ca-simulator-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ca-nav-menu {
+        display: none; /* Simplificado para landing móvil */
+      }
+
+      .ca-nav-mobile-btn {
+        display: block;
+      }
+
+      .ca-form-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .ca-form-btn {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <header class="ca-nav-header">
+    <div class="ca-nav-container">
+      <a href="#" class="ca-nav-logo" aria-label="Volver a Inicio de Corcheteando Ando">
+        <!-- SVG Icono Ovillo de Lana -->
+        <svg class="ca-nav-logo-icon" viewBox="0 0 512 512" aria-hidden="true">
+          <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z M256 32c123.7 0 224 100.3 224 224s-100.3 224-224 224S32 379.7 32 256 132.3 32 256 32z"/>
+          <path d="M256 128c-70.6 0-128 57.4-128 128s57.4 128 128 128 128-57.4 128-128-57.4-128-128-128zm0 216c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88z"/>
+        </svg>
+        Corcheteando Ando
+      </a>
+      <nav aria-label="Navegación principal">
+        <ul class="ca-nav-menu">
+          <li><a href="#catalogo" class="ca-nav-link">Catálogo</a></li>
+          <li><a href="#simulador" class="ca-nav-link">Pruébalo En Vivo</a></li>
+          <li><a href="#suscripcion" class="ca-nav-link">Club de Tejedores</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO -->
+  <main>
+    <section class="ca-hero-section">
+      <div class="ca-hero-container">
+        <div class="ca-hero-content">
+          <span class="ca-hero-tag">Hecho a mano con Amor ✦</span>
+          <h1 class="ca-hero-title">Encuentra tu inspiración punto a punto</h1>
+          <p class="ca-hero-subtitle">Te acompañamos en tu viaje textil. Ofrecemos lanas de origen natural, patrones descargables creativos y video tutoriales paso a paso diseñados para calentar tu corazón.</p>
+          <div class="ca-hero-actions">
+            <a href="#catalogo" class="ca-hero-btn-primary">Ver Catálogo Artesanal</a>
+            <a href="#simulador" class="ca-hero-btn-secondary">Personalizar Proyecto</a>
+          </div>
+        </div>
+        
+        <div class="ca-hero-illustration">
+          <div class="ca-hero-image-wrapper">
+            <!-- SVG Ilustración Artesanal de Crochet y Aguja -->
+            <svg class="ca-hero-svg-deco" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración artesanal de ovillo de lana con ganchillo">
+              <circle cx="200" cy="160" r="110" fill="#faedcd" stroke="#4a3f35" stroke-width="4"/>
+              <!-- Patrón de ovillo -->
+              <path d="M120 120 C160 80, 240 80, 280 120" stroke="#d4a373" stroke-width="4" stroke-linecap="round"/>
+              <path d="M110 160 C150 120, 250 120, 290 160" stroke="#4a3f35" stroke-width="3" stroke-linecap="round"/>
+              <path d="M120 200 C160 240, 240 240, 280 200" stroke="#d4a373" stroke-width="4" stroke-linecap="round"/>
+              <path d="M160 100 C160 160, 240 160, 240 220" stroke="#4a3f35" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Ganchillo/Aguja Crochet -->
+              <rect x="70" y="270" width="280" height="14" rx="7" transform="rotate(-30 70 270)" fill="#4a3f35"/>
+              <path d="M300 137 C315 125, 320 135, 312 143" stroke="#4a3f35" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <!-- Detalles cariñosos -->
+              <path d="M185 240 C190 235, 210 235, 215 240" stroke="#4a3f35" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <circle cx="180" cy="230" r="4" fill="#ffb3c1"/>
+              <circle cx="220" cy="230" r="4" fill="#ffb3c1"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CATÁLOGO -->
+    <section class="ca-section-products" id="catalogo">
+      <div class="ca-section-title-wrapper">
+        <h2 class="ca-section-title">Nuestras Creaciones</h2>
+        <div class="ca-section-divider"></div>
+      </div>
+      
+      <div class="ca-products-grid">
+        <!-- Tarjeta 1: Lanas -->
+        <article class="ca-card-container">
+          <div class="ca-card-icon-box">
+            <svg class="ca-card-icon" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </div>
+          <h3 class="ca-card-title">Lanas de Origen Natural</h3>
+          <p class="ca-card-desc">Fibras 100% orgánicas seleccionadas con mimo. Algodones rústicos, lana merino hilada a mano y tintes naturales que cuidan el planeta y tus manos.</p>
+          <div class="ca-card-badge-container">
+            <span class="ca-card-badge">Orgánico</span>
+            <span class="ca-card-badge">Tinte Natural</span>
+          </div>
+          <a href="#contacto" class="ca-card-btn" onclick="seleccionarOpcion('Lanas Naturales')">Explorar Fibras</a>
+        </article>
+
+        <!-- Tarjeta 2: Patrones -->
+        <article class="ca-card-container">
+          <div class="ca-card-icon-box">
+            <svg class="ca-card-icon" viewBox="0 0 24 24">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+          </div>
+          <h3 class="ca-card-title">Patrones Descargables</h3>
+          <p class="ca-card-desc">Diseños propios explicados fila por fila de forma ultra detallada. Diagramas sencillos ideales para tejedores principiantes y avanzados.</p>
+          <div class="ca-card-badge-container">
+            <span class="ca-card-badge">PDF Interactivo</span>
+            <span class="ca-card-badge">Soporte Chat</span>
+          </div>
+          <a href="#contacto" class="ca-card-btn" onclick="seleccionarOpcion('Patrones de Crochet')">Ver Catálogo PDF</a>
+        </article>
+
+        <!-- Tarjeta 3: Tutoriales -->
+        <article class="ca-card-container">
+          <div class="ca-card-icon-box">
+            <svg class="ca-card-icon" viewBox="0 0 24 24">
+              <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1.45-1-1v12c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+            </svg>
+          </div>
+          <h3 class="ca-card-title">Tutoriales Paso a Paso</h3>
+          <p class="ca-card-desc">Vídeos guiados en alta definición donde tejemos juntos desde el anillo mágico inicial hasta los detalles de costura final de tus amigurumis.</p>
+          <div class="ca-card-badge-container">
+            <span class="ca-card-badge">Acceso Infinito</span>
+            <span class="ca-card-badge">Multi-ángulo</span>
+          </div>
+          <a href="#contacto" class="ca-card-btn" onclick="seleccionarOpcion('Videotutoriales')">Entrar a la Academia</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN SIMULADOR EN VIVO (INTERACTIVO) -->
+    <section class="ca-simulator-section" id="simulador">
+      <div class="ca-simulator-container">
+        <div class="ca-simulator-info">
+          <span class="ca-hero-tag">Laboratorio de Color ✦</span>
+          <h2 class="ca-simulator-title">Prueba tu combinación favorita en vivo</h2>
+          <p class="ca-simulator-text">Antes de adquirir el material o el patrón, utiliza nuestra herramienta interactiva para simular cómo lucirán tus amigurumis tejiendo con la paleta de hilados naturales de "Corcheteando Ando".</p>
+          
+          <div class="ca-simulator-options">
+            <div class="ca-simulator-option-group">
+              <span class="ca-simulator-option-title">Color Principal del Pulpito:</span>
+              <div class="ca-simulator-swatches" id="swatches-body" role="radiogroup" aria-label="Color del cuerpo">
+                <button class="ca-simulator-swatch active" style="background-color: #d4a373;" data-color="#d4a373" aria-label="Color Terracota" role="radio" aria-checked="true"></button>
+                <button class="ca-simulator-swatch" style="background-color: #e9edc9;" data-color="#e9edc9" aria-label="Color Verde Oliva" role="radio" aria-checked="false"></button>
+                <button class="ca-simulator-swatch" style="background-color: #faedcd;" data-color="#faedcd" aria-label="Color Crema Natural" role="radio" aria-checked="false"></button>
+                <button class="ca-simulator-swatch" style="background-color: #4a3f35;" data-color="#4a3f35" aria-label="Color Chocolate" role="radio" aria-checked="false"></button>
+              </div>
+            </div>
+
+            <div class="ca-simulator-option-group">
+              <span class="ca-simulator-option-title">Accesorio (Lazo / Gorro):</span>
+              <div class="ca-simulator-swatches" id="swatches-acc" role="radiogroup" aria-label="Color del accesorio">
+                <button class="ca-simulator-swatch" style="background-color: #d4a373;" data-color="#d4a373" aria-label="Accesorio Terracota" role="radio" aria-checked="false"></button>
+                <button class="ca-simulator-swatch active" style="background-color: #e9edc9;" data-color="#e9edc9" aria-label="Accesorio Verde Oliva" role="radio" aria-checked="true"></button>
+                <button class="ca-simulator-swatch" style="background-color: #faedcd;" data-color="#faedcd" aria-label="Accesorio Crema Natural" role="radio" aria-checked="false"></button>
+                <button class="ca-simulator-swatch" style="background-color: #4a3f35;" data-color="#4a3f35" aria-label="Accesorio Chocolate" role="radio" aria-checked="false"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ca-simulator-preview-box">
+          <!-- Amigurumi Pulpito Vectorial Interactivo -->
+          <svg class="ca-amigurumi-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g id="pulpito">
+              <!-- Tentáculos de abajo para dar volumen de crochet -->
+              <path class="ca-amigurumi-body" d="M40 140 C20 150, 30 180, 50 170 C70 180, 80 150, 80 140" />
+              <path class="ca-amigurumi-body" d="M160 140 C180 150, 170 180, 150 170 C130 180, 120 150, 120 140" />
+              <path class="ca-amigurumi-body" d="M100 145 C90 175, 110 175, 110 145" />
+              
+              <!-- Cuerpo principal ovalado (como amigurumi relleno) -->
+              <ellipse class="ca-amigurumi-body" cx="100" cy="100" rx="60" ry="50" />
+              
+              <!-- Detalles de textura cosida (Punto de crochet "v") -->
+              <path d="M70 80 L73 85 L76 80 M120 80 L123 85 L126 80 M95 115 L98 120 L101 115" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- Ojos tiernos con brillo -->
+              <circle class="ca-amigurumi-eyes" cx="75" cy="100" r="8" />
+              <circle cx="73" cy="97" r="2.5" fill="#ffffff" />
+              
+              <circle class="ca-amigurumi-eyes" cx="125" cy="100" r="8" />
+              <circle cx="123" cy="97" r="2.5" fill="#ffffff" />
+
+              <!-- Mejillas sonrosadas (Rubor de fieltro) -->
+              <circle class="ca-amigurumi-cheeks" cx="63" cy="108" r="6" />
+              <circle class="ca-amigurumi-cheeks" cx="137" cy="108" r="6" />
+
+              <!-- Boquita feliz cosida -->
+              <path d="M96 106 Q100 111 104 106" stroke="var(--ca-color-chocolate)" stroke-width="3" fill="none" stroke-linecap="round" />
+
+              <!-- Lazo / Accesorio Teñido -->
+              <g id="lazo-accesorio">
+                <circle class="ca-amigurumi-acc" cx="140" cy="60" r="12" />
+                <path class="ca-amigurumi-acc" d="M140 60 L152 50 L152 70 Z" />
+                <path class="ca-amigurumi-acc" d="M140 60 L128 50 L128 70 Z" />
+                <circle cx="140" cy="60" r="4" fill="#ffffff" />
+              </g>
+            </g>
+          </svg>
+
+          <span class="ca-simulator-label" id="ca-visualizer-tag">Proyecto: Pulpito Terracota & Oliva</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULARIO DE CAPTACIÓN -->
+    <section class="ca-form-section" id="suscripcion">
+      <div class="ca-form-card">
+        <h2 class="ca-form-title">Únete al Club de Tejedores</h2>
+        <p class="ca-form-subtitle">Recibe un patrón gratuito cada mes directamente en tu correo y accede a ofertas exclusivas en lanas teñidas a mano.</p>
+        
+        <form class="ca-form-element" id="clubForm" onsubmit="procesarSuscripcion(event)">
+          <div class="ca-form-inputs">
+            <div class="ca-form-control-wrapper">
+              <label for="ca-nombre" class="ca-form-label">Tu Nombre:</label>
+              <input type="text" id="ca-nombre" class="ca-form-input" placeholder="Ej. Valeria Soler" required>
+            </div>
+            <div class="ca-form-control-wrapper">
+              <label for="ca-correo" class="ca-form-label">Tu Correo Electrónico:</label>
+              <input type="email" id="ca-correo" class="ca-form-input" placeholder="valeria@correo.com" required>
+            </div>
+            
+            <div class="ca-form-control-wrapper" style="grid-column: span 2; text-align: left;">
+              <label for="ca-interes" class="ca-form-label">¿Qué te gustaría tejer hoy?</label>
+              <select id="ca-interes" class="ca-form-input">
+                <option value="Lanas Naturales">Lanas Naturales & Ovillos</option>
+                <option value="Patrones de Crochet">Patrones Descargables</option>
+                <option value="Videotutoriales">Videotutoriales Paso a Paso</option>
+              </select>
+            </div>
+          </div>
+          
+          <button type="submit" class="ca-form-btn">Inscribirme al Club Artesanal</button>
+        </form>
+
+        <div id="ca-form-status" class="ca-message-box ca-message-success" role="alert"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="ca-footer-section">
+    <div class="ca-footer-container">
+      <div class="ca-footer-col">
+        <div class="ca-footer-logo">
+          <svg class="ca-footer-logo-icon" viewBox="0 0 512 512" aria-hidden="true">
+            <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z M256 32c123.7 0 224 100.3 224 224s-100.3 224-224 224S32 379.7 32 256 132.3 32 256 32z"/>
+          </svg>
+          Corcheteando Ando
+        </div>
+        <p class="ca-footer-desc">Espacio artesanal dedicado a rescatar el hermoso arte del tejido a mano con materiales respetuosos con el medio ambiente.</p>
+      </div>
+
+      <div class="ca-footer-col">
+        <h4 class="ca-footer-title">Enlaces Útiles</h4>
+        <ul class="ca-footer-links">
+          <li><a href="#catalogo" class="ca-footer-link">Nuestros Productos</a></li>
+          <li><a href="#simulador" class="ca-footer-link">Simulador de Color</a></li>
+          <li><a href="#suscripcion" class="ca-footer-link">Unirse al Club</a></li>
+        </ul>
+      </div>
+
+      <div class="ca-footer-col">
+        <h4 class="ca-footer-title">Contacto de Cariño</h4>
+        <p class="ca-footer-desc">Hola@corcheteandoando.com</p>
+        <p class="ca-footer-desc">Taller Central: Tunja, Boyacá</p>
+      </div>
+    </div>
+    
+    <div class="ca-footer-bottom">
+      <p>&copy; 2026 Corcheteando Ando. Hecho a mano, punto por punto. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Lógica de Control de la Landing Page -->
+  <script>
+    // Configuración de Paleta Humana y Simulación Interactiva
+    const colorNombres = {
+      '#d4a373': 'Terracota',
+      '#e9edc9': 'Oliva',
+      '#faedcd': 'Crema Natural',
+      '#4a3f35': 'Chocolate'
+    };
+
+    let cuerpoActual = '#d4a373';
+    let accActual = '#e9edc9';
+
+    // Manejo de clicks en selectores del simulador
+    document.querySelectorAll('#swatches-body .ca-simulator-swatch').forEach(swatch => {
+      swatch.addEventListener('click', function() {
+        // Remover activos anteriores
+        document.querySelectorAll('#swatches-body .ca-simulator-swatch').forEach(s => {
+          s.classList.remove('active');
+          s.setAttribute('aria-checked', 'false');
+        });
+        
+        // Activar el seleccionado
+        this.classList.add('active');
+        this.setAttribute('aria-checked', 'true');
+        
+        cuerpoActual = this.getAttribute('data-color');
+        
+        // Actualizar SVG
+        document.querySelectorAll('.ca-amigurumi-body').forEach(el => {
+          el.style.fill = cuerpoActual;
+        });
+        
+        actualizarEtiquetaVisualizador();
+      });
+    });
+
+    document.querySelectorAll('#swatches-acc .ca-simulator-swatch').forEach(swatch => {
+      swatch.addEventListener('click', function() {
+        // Remover activos anteriores
+        document.querySelectorAll('#swatches-acc .ca-simulator-swatch').forEach(s => {
+          s.classList.remove('active');
+          s.setAttribute('aria-checked', 'false');
+        });
+        
+        // Activar el seleccionado
+        this.classList.add('active');
+        this.setAttribute('aria-checked', 'true');
+        
+        accActual = this.getAttribute('data-color');
+        
+        // Actualizar SVG
+        document.querySelectorAll('.ca-amigurumi-acc').forEach(el => {
+          el.style.fill = accActual;
+        });
+        
+        actualizarEtiquetaVisualizador();
+      });
+    });
+
+    function actualizarEtiquetaVisualizador() {
+      const nombreCuerpo = colorNombres[cuerpoActual] || cuerpoActual;
+      const nombreAcc = colorNombres[accActual] || accActual;
+      const label = document.getElementById('ca-visualizer-tag');
+      label.textContent = `Proyecto: Pulpito ${nombreCuerpo} & ${nombreAcc}`;
+    }
+
+    // Vinculación rápida de catálogo a formulario
+    function seleccionarOpcion(valor) {
+      const select = document.getElementById('ca-interes');
+      select.value = valor;
+      
+      // Desplazamiento suave con respecto a Reduced Motion
+      const element = document.getElementById('suscripcion');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Procesamiento de formulario simulado
+    function procesarSuscripcion(event) {
+      event.preventDefault();
+      
+      const nombre = document.getElementById('ca-nombre').value;
+      const correo = document.getElementById('ca-correo').value;
+      const interes = document.getElementById('ca-interes').value;
+      
+      const statusBox = document.getElementById('ca-form-status');
+      
+      statusBox.innerHTML = `🌟 ¡Gracias por sumarte, ${nombre}! Te hemos enviado tu primer patrón de regalo en formato digital sobre <strong>${interes}</strong> a tu correo (${correo}). ¡A tejer se ha dicho! 🧶`;
+      statusBox.style.display = 'block';
+      
+      // Limpiar Formulario
+      document.getElementById('clubForm').reset();
+    }
+  </script>
+</body>
+</html>
