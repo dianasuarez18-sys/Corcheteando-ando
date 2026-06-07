@@ -1,0 +1,15 @@
+{
+  "name": "Corcheteando Ando",
+  "short_name": "Crochet",
+  "start_url": "/Corcheteando-ando/index.html",
+  "display": "standalone",
+  "background_color": "#faedcd",
+  "theme_color": "#d4a373",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
