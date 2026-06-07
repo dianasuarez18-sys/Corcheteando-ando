@@ -46,3 +46,6 @@
 Desarrollado por **Diana Suárez** como parte del curso  
 *Tecnología de Programación de Sistemas Informáticos*  
 Universidad Pedagógica y Tecnológica de Colombia — 2025
+
+---
+*Proyecto desarrollado con asistencia de Google AI Studio y Gemini.*
